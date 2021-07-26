@@ -60,7 +60,7 @@ public class TXRService {
 
         Iterator<Row> rowIterator = XLSX.Connect(path);
 
-        int j = 9;
+        int j = 1;
 
         //varre todas as linhas da planilha 0
         while (rowIterator.hasNext()) {
@@ -89,7 +89,7 @@ public class TXRService {
                             //verifica se era um nulo numerico
                             if(cell.getStringCellValue().equals("--"))
                             {
-                                collum.add("999");
+                                collum.add("NaN");
                             }else{
                                 collum.add(cell.getStringCellValue());
                             }
@@ -108,6 +108,7 @@ public class TXRService {
                 saveList(collum , ano);
             }
         }
+
         return path;
     }
 
