@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import projeto.educacao.model.municipio.DTO.MunicipioDTO;
+import projeto.educacao.model.municipio.dto.MunicipioDTO;
 
 import projeto.educacao.service.municipio.MunicipioService;
 

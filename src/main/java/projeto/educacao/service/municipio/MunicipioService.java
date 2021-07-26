@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import projeto.educacao.exception.NotFoundException;
 import projeto.educacao.mapper.municipio.MunicipioMapper;
-import projeto.educacao.model.municipio.DTO.MunicipioDTO;
+import projeto.educacao.model.municipio.dto.MunicipioDTO;
 import projeto.educacao.model.municipio.Municipio;
 import projeto.educacao.repository.municipio.MunicipioRepository;
 import projeto.educacao.utils.XLSX;

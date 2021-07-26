@@ -1,9 +1,8 @@
 package projeto.educacao.mapper.municipio;
 
 import org.springframework.stereotype.Component;
-import projeto.educacao.model.municipio.DTO.MunicipioDTO;
+import projeto.educacao.model.municipio.dto.MunicipioDTO;
 import projeto.educacao.model.municipio.Municipio;
-import projeto.educacao.model.txr.TXR;
 
 import java.util.ArrayList;
 import java.util.List;
