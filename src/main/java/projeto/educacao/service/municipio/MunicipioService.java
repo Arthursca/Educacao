@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import projeto.educacao.exception.NotFoundException;
 import projeto.educacao.mapper.municipio.MunicipioMapper;
 import projeto.educacao.model.municipio.DTO.MunicipioDTO;
 import projeto.educacao.model.municipio.Municipio;
@@ -29,6 +30,12 @@ public class MunicipioService {
         Municipio municipio = mapper.toEntity(dto);
         repository.save(municipio);
         return mapper.toDTO(municipio);
+    }
+
+    @Transactional(readOnly = true)
+    public MunicipioDTO findByNomeMunicipioAndLocalizacaoAndDependenciaAdm(String nome, String localizacao, String dependencia){
+        return repository.findByNomeMunicipioAndLocalizacaoAndDependenciaAdm(nome,localizacao,dependencia)
+                .map(mapper::toDTO).orElseThrow(NotFoundException:: new);
     }
 
     @Transactional

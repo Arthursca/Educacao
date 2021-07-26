@@ -26,12 +26,19 @@ public class MunicipioController {
     }
 
     @PostMapping (value = "/{path}")
-    public ResponseEntity<String> saveXLSXbyPath(String path){
+    public ResponseEntity<String> saveXLSXbyPath(@PathVariable String path){
         return ResponseEntity.ok(service.saveXLSXbyPath(path));
     }
 
     @PostMapping
     public ResponseEntity<MunicipioDTO> saveList(ArrayList<String> s){
         return ResponseEntity.ok(service.saveList(s));
+    }
+
+    @GetMapping(value = "/{nome}&{localizacao}&{dependencia}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MunicipioDTO>  findByNomeMunicipioAndLocalizacaoAndDependenciaAdm
+            (@PathVariable String nome,@PathVariable String localizacao,@PathVariable String dependencia){
+        return ResponseEntity.ok(service.
+                findByNomeMunicipioAndLocalizacaoAndDependenciaAdm(nome, localizacao, dependencia));
     }
 }
