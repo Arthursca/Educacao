@@ -1,6 +1,4 @@
-package projeto.educacao.model.municipio.DTO;
-
-import javax.persistence.Column;
+package projeto.educacao.model.municipio.dto;
 
 public class MunicipioDTO {
 
