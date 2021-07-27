@@ -19,9 +19,8 @@ public class XLSX {
             FileInputStream fisPlanilha = null;
 
             try {
-                File file = new File("D:\\Documentos\\Projeto Educação\\avaliacao\\2017\\Municipios\\TAXA_REND_2017_MUNICIPIOS\\TX_REND_MUNICIPIOS_2017.xlsx");
+                File file = new File(path);
                 fisPlanilha = new FileInputStream(file);
-
                 //cria um workbook = planilha toda com todas as abas
                 XSSFWorkbook workbook = new XSSFWorkbook(fisPlanilha);
 

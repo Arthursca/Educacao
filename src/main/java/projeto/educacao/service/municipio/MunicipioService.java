@@ -1,62 +1,53 @@
-package projeto.educacao.service.txr;
+package projeto.educacao.service.municipio;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import projeto.educacao.exception.BussinesException;
-import projeto.educacao.mapper.txr.TXRMapper;
-import projeto.educacao.model.txr.DTO.TXRDTO;
-import projeto.educacao.model.txr.TXR;
-import projeto.educacao.repository.txr.TXRRepository;
-import projeto.educacao.utils.MessageUtils;
+import projeto.educacao.exception.NotFoundException;
+import projeto.educacao.mapper.municipio.MunicipioMapper;
+import projeto.educacao.model.municipio.dto.MunicipioDTO;
+import projeto.educacao.model.municipio.Municipio;
+import projeto.educacao.repository.municipio.MunicipioRepository;
 import projeto.educacao.utils.XLSX;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
 
 @Service
-public class TXRService {
-    @Autowired
-    private TXRRepository repository;
+public class MunicipioService {
 
     @Autowired
-    private TXRMapper mapper;
+    private MunicipioMapper mapper;
+
+    @Autowired
+    private MunicipioRepository repository;
 
     @Transactional
-    public TXRDTO save(TXRDTO dto) {
+    public MunicipioDTO save(MunicipioDTO dto) {
 
-        TXR txr = mapper.toEntity(dto);
-        repository.save(txr);
-        return mapper.toDto(txr);
+        Municipio municipio = mapper.toEntity(dto);
+        repository.save(municipio);
+        return mapper.toDTO(municipio);
     }
 
     @Transactional(readOnly = true)
-    public List<TXRDTO> findAll() {
-        List<TXR> list = repository.findAll();
-        return mapper.toDto(list);
+    public MunicipioDTO findByNomeMunicipioAndLocalizacaoAndDependenciaAdm(String nome, String localizacao, String dependencia){
+        return repository.findByNomeMunicipioAndLocalizacaoAndDependenciaAdm(nome,localizacao,dependencia)
+                .map(mapper::toDTO).orElseThrow(NotFoundException:: new);
     }
 
     @Transactional
-    public TXRDTO saveList(ArrayList<String> list, Long ano){
-        TXR txr = mapper.ListtoEntity(list);
-        txr.setAno(ano);
-
-        Optional<TXR> optionalTXR = repository.findByAno(ano);
-
-        if (optionalTXR.isPresent()){
-            throw new BussinesException(MessageUtils.TXR_ALREADY_EXISTS);
-        }
-
-        repository.save(txr);
-        return mapper.toDto(txr);
+    public MunicipioDTO saveList(ArrayList<String> list){
+        Municipio municipio = mapper.ListtoEntity(list);
+        repository.save(municipio);
+        return mapper.toDTO(municipio);
     }
 
+
     @Transactional
-    public String saveXLSXbyPath(String path, Long ano) {
+    public String saveXLSXbyPath(String path) {
 
         Iterator<Row> rowIterator = XLSX.Connect(path);
 
@@ -105,11 +96,9 @@ public class TXRService {
 
             //caso tenha todos os elementos da tabela, salva
             if(collum.size() == 61){
-                saveList(collum , ano);
+                saveList(collum);
             }
         }
-
         return path;
     }
-
 }

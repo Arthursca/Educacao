@@ -1,34 +1,19 @@
-package projeto.educacao.model.municipio;
+package projeto.educacao.model.municipio.dto;
 
+public class MunicipioDTO {
 
-import javax.persistence.*;
-
-
-@Entity
-@Table(name = "tb_municipio")
-public class Municipio {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "regiao")
     private String regiao;
 
-    @Column(name = "uf")
     private String UF;
 
-    @Column(name = "cod_municipio")
     private Long codMunicipio;
 
-    @Column(name = "nome_municipio")
     private String nomeMunicipio;
 
-    @Column(name = "localizacao")
     private String localizacao;
 
-    @Column(name = "dependencia_adm")
     private String dependenciaAdm;
 
     public Long getId() {
